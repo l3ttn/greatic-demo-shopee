@@ -184,10 +184,23 @@
             </div>
             <div class="demo-content">
                 <div class="demo-video">
-                    <div class="video-placeholder">
-                        <div class="video-icon">▶️</div>
-                        <p>Vídeo Demonstração<br><small>Sistema completo em funcionamento</small></p>
-                    </div>
+                    <video 
+                        class="demo-video-player" 
+                        autoplay 
+                        muted 
+                        loop 
+                        playsinline
+                        poster="assets/images/video-poster.jpg"
+                        controls>
+                        <source src="demonstracao.mov" type="video/quicktime">
+                        <source src="demonstracao.mp4" type="video/mp4">
+                        <div class="video-fallback">
+                            <div class="video-icon">▶️</div>
+                            <p>Seu navegador não suporta reprodução de vídeo.<br>
+                               <a href="demonstracao.mov" target="_blank">Clique aqui para baixar o vídeo</a>
+                            </p>
+                        </div>
+                    </video>
                 </div>
                 <div class="demo-credentials">
                     <h3>🧪 Credenciais de Teste</h3>

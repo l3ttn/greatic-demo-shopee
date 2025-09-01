@@ -486,7 +486,23 @@ section {
     align-items: start;
 }
 
-.video-placeholder {
+.demo-video-player {
+    width: 100%;
+    aspect-ratio: 16/9;
+    border-radius: 16px;
+    box-shadow: var(--shadow-hover);
+    background: var(--dark-color);
+    object-fit: cover;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.demo-video-player:hover {
+    transform: scale(1.02);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+}
+
+.video-fallback {
     background: var(--dark-color);
     aspect-ratio: 16/9;
     border-radius: 16px;
@@ -496,12 +512,23 @@ section {
     justify-content: center;
     color: white;
     text-align: center;
+    padding: 2rem;
 }
 
-.video-icon {
+.video-fallback .video-icon {
     font-size: 4rem;
     margin-bottom: 1rem;
     opacity: 0.8;
+}
+
+.video-fallback a {
+    color: var(--secondary-color);
+    text-decoration: underline;
+    font-weight: 600;
+}
+
+.video-fallback a:hover {
+    color: white;
 }
 
 .demo-credentials {
