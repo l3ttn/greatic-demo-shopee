@@ -540,6 +540,28 @@ section {
     font-weight: 600;
 }
 
+.status-development {
+    color: #f39c12;
+    font-weight: 600;
+}
+
+.credential-section {
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.credential-section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.credential-section h4 {
+    margin-bottom: 1rem;
+    color: var(--dark-color);
+    font-size: 1.1rem;
+}
+
 /* Tech Stack */
 .tech-grid {
     display: grid;
