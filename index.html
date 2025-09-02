@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GreaWatch - Sistema de Monitoramento Shopee Brasil | GreaTIC</title>
+    <meta name="description" content="Sistema inteligente de monitoramento automático de ofertas Shopee Brasil com geração de links afiliados. Desenvolvido pela GreaTIC.">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #EE4D2D;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #EE4D2D;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 120px 0 80px;
+            text-align: center;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero .subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .hero .status-badges {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            backdrop-filter: blur(5px);
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #EE4D2D;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            margin: 0.5rem;
+            box-shadow: 0 4px 15px rgba(238, 77, 45, 0.4);
+        }
+
+        .cta-button:hover {
+            background: #d63916;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(238, 77, 45, 0.6);
+        }
+
+        .cta-button.secondary {
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+        }
+
+        .cta-button.secondary:hover {
+            background: white;
+            color: #667eea;
+        }
+
+        /* Demo Section */
+        .demo-section {
+            background: white;
+            padding: 80px 0;
+            margin-top: -40px;
+            border-radius: 40px 40px 0 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #333;
+        }
+
+        .demo-video {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            background: #f8f9fa;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .video-placeholder {
+            position: relative;
+            width: 100%;
+            height: 450px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .video-placeholder .play-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+
+        .video-placeholder h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .video-placeholder p {
+            opacity: 0.8;
+        }
+
+        /* Features Section */
+        .features {
+            background: #f8f9fa;
+            padding: 80px 0;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Credentials Section */
+        .credentials {
+            background: white;
+            padding: 80px 0;
+        }
+
+        .credentials-content {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .credentials-box {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            border-left: 4px solid #EE4D2D;
+        }
+
+        .command-example {
+            background: #1a1a1a;
+            color: #00ff00;
+            padding: 1.5rem;
+            border-radius: 10px;
+            font-family: 'Consolas', monospace;
+            text-align: left;
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+
+        .command-example .prompt {
+            color: #00ff00;
+        }
+
+        .command-example .output {
+            color: #ffff00;
+            margin-left: 1rem;
+        }
+
+        /* Results Section */
+        .results {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 80px 0;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .result-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .result-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Tech Stack */
+        .tech-stack {
+            background: white;
+            padding: 80px 0;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .tech-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+            transition: background 0.3s;
+        }
+
+        .tech-item:hover {
+            background: #e9ecef;
+        }
+
+        .tech-icon {
+            margin-right: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: #1a1a1a;
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .contact-link:hover {
+            color: #EE4D2D;
+        }
+
+        /* Footer */
+        .footer {
+            background: #111;
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .hero .status-badges {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .contact-links {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="container">
+            <div class="nav">
+                <div class="logo">🤖 GreaWatch</div>
+                <ul class="nav-links">
+                    <li><a href="#demo">Demo</a></li>
+                    <li><a href="#features">Funcionalidades</a></li>
+                    <li><a href="#credentials">Acesso</a></li>
+                    <li><a href="#results">Resultados</a></li>
+                    <li><a href="#structure">Projeto</a></li>
+                    <li><a href="#tech">Tecnologias</a></li>
+                    <li><a href="#contact">Contato</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>🤖 GreaWatch</h1>
+            <p class="subtitle">Sistema Inteligente de Monitoramento de Ofertas Shopee Brasil</p>
+            
+            <div class="status-badges">
+                <span class="badge">✅ Operacional 24/7</span>
+                <span class="badge">🐍 Python 3.11+</span>
+                <span class="badge">💬 Discord Bot</span>
+                <span class="badge">🛒 Shopee Brasil</span>
+            </div>
+            
+            <div>
+                <a href="https://discord.gg/2znYY8sG" target="_blank" class="cta-button">💬 Testar no Discord</a>
+                <a href="#demo" class="cta-button secondary">🎥 Ver Demo</a>
+                <a href="#credentials" class="cta-button secondary">📋 Documentação</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Section -->
+    <section id="demo" class="demo-section">
+        <div class="container">
+            <h2 class="section-title">🎥 Demonstração do Sistema</h2>
+            
+            <div class="demo-video">
+                <video controls width="100%" style="border-radius: 15px;">
+                    <source src="video-demonstracao.mov" type="video/quicktime">
+                    <source src="video-demonstracao.mov" type="video/mp4">
+                    <div class="video-placeholder">
+                        <div class="play-icon">▶️</div>
+                        <h3>GreaWatch em Ação</h3>
+                        <p>Vídeo demonstrativo do sistema funcionando em tempo real</p>
+                        <p><em>Seu navegador não suporta a reprodução deste vídeo</em></p>
+                    </div>
+                </video>
+            </div>
+            
+            <div class="command-example">
+                <div class="prompt">Discord > #greawatch-bot</div>
+                <div>!gw testar_link https://shopee.com.br/Smart-Tv-Full-Hd-Led-43-Samsung-i.359168917.27832616358</div>
+                <div class="output">✅ Link testado com sucesso!</div>
+                <div class="output">🔗 Link afiliado: https://shopee.com.br/produto-i.359168917.27832616358?af=greatic&aff_sub=18373260680&utm_source=greawatch</div>
+                <div class="output">⚡ Tempo de processamento: 0.25s</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title">🚀 Funcionalidades Principais</h2>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🔄</div>
+                    <h3>Monitoramento 24/7</h3>
+                    <p>Sistema automático que verifica ofertas a cada 2 minutos, detectando Flash Sales e promoções especiais</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🔗</div>
+                    <h3>Links Afiliados</h3>
+                    <p>Geração instantânea de links afiliados com rastreamento personalizado e códigos UTM</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🔥</div>
+                    <h3>Detecção de Ofertas</h3>
+                    <p>Filtros inteligentes para detectar descontos de 50-85%, bugs de preço e promoções relâmpago</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3>Bot Discord</h3>
+                    <p>Interface completa via Discord com comandos fáceis e notificações em tempo real</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🛡️</div>
+                    <h3>Sistema Híbrido</h3>
+                    <p>Arquitetura resiliente que funciona mesmo sem API oficial da Shopee</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">⭐</div>
+                    <h3>Filtros Inteligentes</h3>
+                    <p>Filtragem por desconto, preço, rating e categoria com configurações personalizáveis</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Credentials Section -->
+    <section id="credentials" class="credentials">
+        <div class="container">
+            <div class="credentials-content">
+                <h2 class="section-title">🔐 Acesso ao Sistema</h2>
+                
+                <div class="credentials-box">
+                    <h3>🤖 Sistema Atualmente Funcional</h3>
+                    <ul style="text-align: left; margin-top: 1rem;">
+                        <li>✅ Bot Discord com comandos básicos</li>
+                        <li>✅ Sistema híbrido de coleta de dados</li>
+                        <li>✅ Banco SQLite com sistema anti-spam</li>
+                        <li>✅ Geração de links afiliados</li>
+                        <li>✅ Monitoramento automático de preços</li>
+                        <li>✅ Filtros inteligentes por categoria</li>
+                        <li>✅ Logs detalhados em tempo real</li>
+                    </ul>
+                    
+                    <div style="margin-top: 1.5rem; padding: 1rem; background: #e8f5e8; border-radius: 10px; border-left: 4px solid #28a745;">
+                        <h4 style="color: #28a745; margin-bottom: 0.5rem;">💬 Testar no Discord Agora!</h4>
+                        <p><strong>Entre no servidor:</strong> <a href="https://discord.gg/2znYY8sG" target="_blank" style="color: #7289da; font-weight: bold;">discord.gg/2znYY8sG</a></p>
+                        <p style="margin: 0.5rem 0;"><strong>Canal:</strong> #greawatch-bot</p>
+                        <p style="margin: 0;"><strong>Teste:</strong> <code>!gw help</code> ou <code>!gw status</code></p>
+                    </div>
+                </div>
+                
+                <div class="credentials-box">
+                    <h3>📋 Comandos Disponíveis</h3>
+                    <div class="command-example">
+                        <div>!gw testar_link &lt;URL&gt;  # Testa e gera link afiliado</div>
+                        <div>!gw help              # Ajuda e comandos</div>
+                        <div>!gw status            # Status do sistema</div>
+                    </div>
+                </div>
+                
+                <div class="credentials-box">
+                    <h3>🏗️ Repositório e Código</h3>
+                    <p><strong>Código Fonte:</strong> Disponível no GitLab (repositório privado)</p>
+                    <p><strong>Arquitetura:</strong> Python + Discord.py + SQLite</p>
+                    <p><strong>Arquivo Principal:</strong> greawatch_bot.py (49KB)</p>
+                    <p><strong>Banco de Dados:</strong> greatic_ecosystem.db (240KB)</p>
+                    <p><strong>Logs Ativos:</strong> greawatch.log (3.5MB de dados reais)</p>
+                    <p><strong>Status:</strong> Sistema operacional pronto para demonstração</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Results Section -->
+    <section id="results" class="results">
+        <div class="container">
+            <h2 class="section-title">📊 Resultados Reais</h2>
+            
+            <div class="results-grid">
+                <div class="result-card">
+                    <div class="result-number">&lt; 1s</div>
+                    <div>Tempo de Resposta</div>
+                </div>
+                
+                <div class="result-card">
+                    <div class="result-number">24/7</div>
+                    <div>Monitoramento Automático</div>
+                </div>
+                
+                <div class="result-card">
+                    <div class="result-number">95%+</div>
+                    <div>Precisão dos Filtros</div>
+                </div>
+                
+                <div class="result-card">
+                    <div class="result-number">6-7</div>
+                    <div>Ofertas por Ciclo</div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 3rem; text-align: center;">
+                <h3>💰 Exemplos de Ofertas Detectadas:</h3>
+                <div style="margin-top: 1rem;">
+                    <p><strong>Air Fryer Mondial:</strong> R$ 272,79 (era R$ 619,98) - <strong>56% OFF</strong></p>
+                    <p><strong>PlayStation 5:</strong> R$ 2.178,64 (era R$ 4.736,17) - <strong>54% OFF</strong></p>
+                    <p><strong>Notebook Lenovo:</strong> R$ 2.389,57 (era R$ 4.119,96) - <strong>42% OFF</strong></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Structure Section -->
+    <section id="structure" class="tech-stack" style="background: #f8f9fa;">
+        <div class="container">
+            <h2 class="section-title">🏗️ Estrutura do Projeto Real</h2>
+            
+            <div class="command-example" style="max-width: 800px; margin: 2rem auto;">
+                <div style="color: #00ff00;">📁 C:\greatic2\ (Sistema GreaWatch)</div>
+                <div style="margin-left: 1rem; color: #ffff00;">
+                    ├── 🤖 greawatch_bot.py (49KB) - Bot Discord principal<br>
+                    ├── 🔄 sistema_ofertas_hibrido.py (14KB) - Sistema híbrido<br>
+                    ├── 🔗 urls_shopee_reais.py (6KB) - Base produtos reais<br>
+                    ├── ⚙️ config_greawatch.py (10KB) - Configurações<br>
+                    ├── 🧠 agente_sistema.py (15KB) - Agente principal<br>
+                    ├── 🧠 agente_avancado.py (26KB) - Agente avançado<br>
+                    ├── 🗄️ greatic_ecosystem.db (240KB) - Banco SQLite<br>
+                    ├── 📊 greawatch.log (3.5MB) - Logs em tempo real<br>
+                    ├── 🎥 video-demonstracao.mov (7.8MB) - Demo funcional<br>
+                    ├── 📚 README.md (6KB) - Documentação completa<br>
+                    ├── 🌐 index.html - Esta landing page<br>
+                    └── 📦 core/ - Módulos internos<br>
+                        ├── database_manager.py - Gestão banco<br>
+                        ├── http_client.py - Cliente HTTP<br>
+                        └── logger.py - Sistema logs
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 2rem;">
+                <p><strong>📊 Total:</strong> 15 arquivos Python + 1 banco SQLite + logs ativos</p>
+                <p><strong>⚡ Status:</strong> Sistema 100% funcional, testado e documentado</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Stack Section -->
+    <section id="tech" class="tech-stack">
+        <div class="container">
+            <h2 class="section-title">🛠️ Tecnologias Utilizadas</h2>
+            
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <span class="tech-icon">🐍</span>
+                    <span><strong>Python 3.11+</strong> - Core do sistema</span>
+                </div>
+                <div class="tech-item">
+                    <span class="tech-icon">💬</span>
+                    <span><strong>Discord.py</strong> - Interface do bot</span>
+                </div>
+                <div class="tech-item">
+                    <span class="tech-icon">🗄️</span>
+                    <span><strong>SQLite</strong> - Banco de dados</span>
+                </div>
+                <div class="tech-item">
+                    <span class="tech-icon">⚡</span>
+                    <span><strong>AsyncIO</strong> - Operações assíncronas</span>
+                </div>
+                <div class="tech-item">
+                    <span class="tech-icon">🌐</span>
+                    <span><strong>HTTP/REST</strong> - APIs externas</span>
+                </div>
+                <div class="tech-item">
+                    <span class="tech-icon">🔧</span>
+                    <span><strong>Regex</strong> - Processamento URLs</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">📞 Contato e Apresentação</h2>
+            <p>Sistema desenvolvido para seminário acadêmico - GreaTIC</p>
+            
+            <div class="contact-links">
+                <a href="mailto:seminario@greatic.edu.br" class="contact-link">
+                    <span>📧</span>
+                    <span>seminario@greatic.edu.br</span>
+                </a>
+                <a href="#tech" class="contact-link">
+                    <span>💻</span>
+                    <span>Código-fonte Local</span>
+                </a>
+                <a href="./README.md" class="contact-link">
+                    <span>📚</span>
+                    <span>Documentação</span>
+                </a>
+                <a href="#demo" class="contact-link">
+                    <span>🎥</span>
+                    <span>Demo ao Vivo</span>
+                </a>
+            </div>
+            
+            <div style="margin-top: 3rem;">
+                <a href="#demo" class="cta-button">🚀 Agendar Demo Shopee</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 GreaTIC - GreaWatch System. Sistema 100% operacional e pronto para uso! 🚀</p>
+            <p><em>Desenvolvido para integração com ecossistema Shopee Brasil</em></p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling para links de navegação
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Efeito de typing no hero
+        const heroTitle = document.querySelector('.hero h1');
+        if (heroTitle) {
+            const text = heroTitle.textContent;
+            heroTitle.textContent = '';
+            let i = 0;
+            
+            function typeWriter() {
+                if (i < text.length) {
+                    heroTitle.textContent += text.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, 100);
+                }
+            }
+            
+            setTimeout(typeWriter, 1000);
+        }
+
+        // Animação de entrada para cards
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Aplicar animação aos cards
+        document.querySelectorAll('.feature-card, .result-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
